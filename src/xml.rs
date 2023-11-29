@@ -180,7 +180,7 @@ pub enum Node {
 pub struct Element {
     attributes: IndexMap<String, String>,
     tag: String,
-    children: Vec<Node>,
+    pub children: Vec<Node>,
 }
 
 impl Element {
