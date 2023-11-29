@@ -79,6 +79,10 @@ impl XmlDocument {
         &self.root
     }
 
+    pub fn take_root(&mut self) -> Option<Node> {
+        self.root.take()
+    }
+
     fn process_cdata(e: &XmlCdata, string_pool: &StringPool) -> Result<Cdata, ParseError> {
         Ok(Cdata {
             data: string_pool
