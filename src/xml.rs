@@ -10,7 +10,7 @@ use crate::ParseError;
 ///Struct representing a parsed XML document.
 #[derive(Debug)]
 pub struct XmlDocument {
-    root: Option<Node>,
+    pub root: Option<Node>,
 }
 
 impl XmlDocument {
@@ -71,16 +71,6 @@ impl XmlDocument {
         }
 
         Ok(Self { root: None })
-    }
-
-    ///Returns the root [Element] of the XML document.
-    #[must_use]
-    pub fn get_root(&self) -> &Option<Node> {
-        &self.root
-    }
-
-    pub fn take_root(&mut self) -> Option<Node> {
-        self.root.take()
     }
 
     fn process_cdata(e: &XmlCdata, string_pool: &StringPool) -> Result<Cdata, ParseError> {
@@ -178,30 +168,18 @@ pub enum Node {
 ///Struct representing an element within the parsed XML document.
 #[derive(Debug)]
 pub struct Element {
-    attributes: IndexMap<String, String>,
-    tag: String,
+    pub attributes: IndexMap<String, String>,
+    pub tag: String,
     pub children: Vec<Node>,
 }
 
 impl Element {
-    ///Returns a map of attributes associated with the element.
-    #[must_use]
-    pub fn get_attributes(&self) -> &IndexMap<String, String> {
-        &self.attributes
-    }
 
     ///Returns the element tag.
     #[must_use]
     pub fn get_tag(&self) -> &str {
         &self.tag
     }
-
-    ///Returns a list of child nodes.
-    #[must_use]
-    pub fn get_children(&self) -> &Vec<Node> {
-        &self.children
-    }
-
     fn insert_children(&mut self, child: Node) {
         self.children.push(child);
     }
